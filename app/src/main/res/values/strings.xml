@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PMDM06_localizacion</string>
+    <string name="location">Tu ubicación</string>
+    <string name="target_location">Ubicación objetivo</string>
+    <string name="actual_length_title">Longitud Actual:</string>
+    <string name="actual_latitude_title">Latitud Actual:</string>
+    <string name="zero">0</string>
+    <string name="target_length">Longitud Objetivo</string>
+    <string name="distance_left">Te quedan: 0 Km</string>
+</resources>
