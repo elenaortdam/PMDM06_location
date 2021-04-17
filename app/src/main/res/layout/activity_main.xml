@@ -44,7 +44,7 @@
 
             <TextView
                     android:id="@+id/current_latitude"
-                    android:layout_width="329dp"
+                    android:layout_width="155dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="@string/actual_latitude_title"
@@ -52,7 +52,7 @@
 
             <TextView
                     android:id="@+id/current_latitude_number"
-                    android:layout_width="59dp"
+                    android:layout_width="233dp"
                     android:layout_height="wrap_content"
                     android:text="@string/zero"
                     android:textColor="@color/black"
@@ -70,7 +70,7 @@
 
             <TextView
                     android:id="@+id/current_length"
-                    android:layout_width="328dp"
+                    android:layout_width="158dp"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
                     android:text="@string/actual_length_title"
@@ -78,7 +78,7 @@
 
             <TextView
                     android:id="@+id/current_length_number"
-                    android:layout_width="60dp"
+                    android:layout_width="228dp"
                     android:layout_height="wrap_content"
                     android:text="@string/zero"
                     android:textColor="@color/black"
@@ -92,6 +92,10 @@
 
     <!--Cuadro localización objetivo-->
 
+    <!--Cuadro latitud y longitud objetivo-->
+
+    <!--    Botón ok-->
+
     <TextView
             android:text="@string/target_location"
             android:layout_width="wrap_content"
@@ -104,18 +108,22 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.337" />
+            app:layout_constraintVertical_bias="0.364" />
 
     <TextView
-            android:text="TextView"
-            android:layout_width="287dp"
-            android:layout_height="17dp"
-            android:id="@+id/textView4"
-            tools:layout_editor_absoluteY="295dp"
+            android:text="@string/explaination"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/explanation"
+            app:layout_constraintBottom_toTopOf="@+id/distance_left"
+            android:layout_marginBottom="300dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-    <!--Cuadro latitud y longitud objetivo-->
     <LinearLayout
             android:id="@+id/target_location_square"
             android:layout_width="match_parent"
@@ -125,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.561"
+            app:layout_constraintVertical_bias="0.643"
             app:layout_constraintHorizontal_bias="0.0">
 
         <!--latitud objetivo-->
@@ -139,14 +147,15 @@
             <TextView
                     android:id="@+id/target_latitude"
                     android:layout_height="wrap_content"
-                    android:text="@string/actual_latitude_title"
+                    android:text="@string/target_latitude"
+                    android:paddingEnd="30sp"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textAlignment="textStart"
-                    android:layout_weight="1"
-                    tools:layout_editor_absoluteY="335dp"
-                    tools:layout_editor_absoluteX="16dp"
-                    android:layout_width="0dp" />
+                    android:layout_weight="0.5"
+                    tools:layout_editor_absoluteY="395dp"
+                    tools:layout_editor_absoluteX="53dp"
+                    android:layout_width="wrap_content" />
 
             <EditText
                     android:id="@+id/target_latitude_number"
@@ -154,8 +163,9 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:paddingEnd="30sp"
-                    android:inputType="number"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:inputType="numberDecimal|numberSigned"
+                    android:layout_width="196sp"
                     android:layout_height="wrap_content" />
         </LinearLayout>
 
@@ -173,9 +183,8 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:paddingEnd="30sp"
-                    android:clickable="true"
                     android:textAlignment="textStart"
-                    android:layout_width="345dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:layout_editor_absoluteY="395dp"
                     tools:layout_editor_absoluteX="53dp" />
@@ -186,20 +195,19 @@
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:paddingEnd="30sp"
-                    android:inputType="number"
+                    android:inputType="numberDecimal|numberSigned"
                     android:textAlignment="textEnd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="196dp"
                     android:layout_height="wrap_content" />
 
         </LinearLayout>
     </LinearLayout>
 
-    <!--    Botón ok-->
     <Button
             android:text="OK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:backgroundTint="@color/black"
             android:textColor="@color/white"
             android:id="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
@@ -227,6 +235,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+            android:text="Localización actual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:id="@+id/test"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.858" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
