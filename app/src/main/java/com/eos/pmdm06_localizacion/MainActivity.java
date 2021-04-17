@@ -24,9 +24,10 @@ public class MainActivity extends AppCompatActivity {
 
 	private LocationManager locationManager;
 	private PhoneLocation currentLocation = new PhoneLocation(0, 0);
+	private PhoneLocation targetLocation = new PhoneLocation(0, 0);
 	TextView currentLatitude;
 	TextView currentLength;
-	TextView test;
+	TextView distanceLeft;
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode,
@@ -48,20 +49,17 @@ public class MainActivity extends AppCompatActivity {
 		Button button = findViewById(R.id.button);
 		currentLatitude = findViewById(R.id.current_latitude_number);
 		currentLength = findViewById(R.id.current_length_number);
+		distanceLeft = findViewById(R.id.distance_left);
 
 		EditText targetLatitude = findViewById(R.id.target_latitude_number);
 		EditText targetLength = findViewById(R.id.target_length_number);
-		test = findViewById(R.id.test);
 		if (locationManager == null) {
 			startLocationManager();
 		}
 		try {
 			currentLocation = updateLocation();
-			currentLatitude.setText(currentLocation.getLatitude());
-			currentLength.setText(currentLocation.getLength());
-
-			test.setText(String.format("Longitud: %s, latitud: %s", currentLatitude.getText(),
-									   currentLength.getText()));
+			currentLatitude.setText(currentLocation.getLatitudeString());
+			currentLength.setText(currentLocation.getLengthString());
 		} catch (AccessDeniedException e) {
 			System.exit(1);
 		}
@@ -74,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
 
 			targetLatitude.clearFocus();
 			targetLength.clearFocus();
+			targetLocation = new PhoneLocation(targetLatitude.getText().toString(),
+											   targetLength.getText().toString());
+			try {
+				updateLocation();
+			} catch (AccessDeniedException e) {
+				e.printStackTrace();
+			}
 			Toast.makeText(MainActivity.this, "Ha introducido los datos correctamente",
 						   Toast.LENGTH_LONG).show();
 		});
@@ -129,11 +134,11 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	private void updateCurrentLocation() {
-		currentLatitude.setText(currentLocation.getLatitude());
-		currentLength.setText(currentLocation.getLength());
-		test.setText(String.format("Longitud: %s, latitud: %s", currentLatitude.getText(),
-								   currentLength.getText()));
-
+		currentLatitude.setText(currentLocation.getLatitudeString());
+		currentLength.setText(currentLocation.getLengthString());
+		double distance = calculateKmLeft(currentLocation.getLatitude(), currentLocation.getLength(),
+										  targetLocation.getLatitude(), targetLocation.getLength());
+		this.distanceLeft.setText(String.format("Te quedan: %.2f km", distance));
 	}
 
 	private boolean checkInput(EditText targetLatitude, EditText targetLength, String s) {
@@ -144,6 +149,31 @@ public class MainActivity extends AppCompatActivity {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Método para calcular en kilometros la distancia entre dos latitudes y longitudes
+	 *
+	 * @param currentLatitude latitud actual
+	 * @param currentLength   longitud actual
+	 * @param targetLatitude  latitud objetivo
+	 * @param targetLength    longitud objetivo
+	 * @return
+	 * @see <a href="https://www.javaer101.com/es/article/2309770.html">Conversor latitud
+	 * y longitud a kilómetros</a>
+	 */
+	public double calculateKmLeft(double currentLatitude, double currentLength,
+								  double targetLatitude, double targetLength) {
+		double earthRadius = 6371000; //meters
+		double latitudeDistance = Math.toRadians(targetLatitude - currentLatitude);
+		double lengthDistance = Math.toRadians(targetLength - currentLength);
+		double a = Math.sin(latitudeDistance / 2) * Math.sin(latitudeDistance / 2) +
+				Math.cos(Math.toRadians(currentLatitude))
+						* Math.cos(Math.toRadians(targetLatitude))
+						* Math.sin(lengthDistance / 2) * Math.sin(lengthDistance / 2);
+		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+		return earthRadius * c / 1000;
 	}
 
 	private final LocationListener locationListener = new LocationListener() {

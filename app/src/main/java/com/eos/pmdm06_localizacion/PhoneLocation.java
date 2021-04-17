@@ -7,18 +7,42 @@ public class PhoneLocation {
 	private final double latitude;
 	private final double length;
 
-	private final int MAX_DECIMAL = 15;
+	private final int MAX_DECIMAL = 8;
 
 	public PhoneLocation(double latitude, double length) {
 		this.latitude = latitude;
 		this.length = length;
 	}
 
-	public String getLatitude() {
+	public PhoneLocation(String latitude, String length)
+			throws IllegalArgumentException {
+		this.latitude = validateInput(latitude);
+		this.length = validateInput(length);
+	}
+
+	private double validateInput(String textNumber) {
+		Double formattedNumber = null;
+		try {
+			formattedNumber = Double.parseDouble(textNumber);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException("Solo se aceptan números");
+		}
+		return formattedNumber;
+	}
+
+	public String getLatitudeString() {
 		return formatDecimals(latitude, MAX_DECIMAL);
 	}
 
-	public String getLength() {
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public String getLengthString() {
 		return formatDecimals(length, MAX_DECIMAL);
 	}
 
