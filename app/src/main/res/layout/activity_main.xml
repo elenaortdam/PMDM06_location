@@ -162,7 +162,7 @@
                     android:text="@string/zero"
                     android:textColor="@color/black"
                     android:textSize="20sp"
-                    android:paddingEnd="30sp"
+                    android:paddingEnd="20sp"
                     android:textAlignment="textEnd"
                     android:inputType="numberDecimal|numberSigned"
                     android:layout_width="196sp"
@@ -235,18 +235,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
-
-    <TextView
-            android:text="Localización actual"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:id="@+id/test"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.858" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

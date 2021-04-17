@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PMDM06_localizacion</string>
+    <string name="app_name">Calcula tu localización</string>
     <string name="location">Tu ubicación</string>
     <string name="target_location">Ubicación objetivo</string>
     <string name="actual_length_title">Longitud Actual:</string>
